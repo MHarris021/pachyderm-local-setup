@@ -7,7 +7,11 @@
 # Example: ./setupTest.sh 1.0.0 true
 # Example: ./setupTest.sh 1.0.0 true my-repo my-image /tmp/test-data
 
+# Note: The imageRepo, imageName, inputDir parameters are optional. If not set, the default values will be used.
+# Additional parameters can be added to the script if needed.
 
+# Lastly, this script assumes that the pachyderm cluster is already running and that the pachctl client is configured to connect to the cluster.
+# Further, this script assumes that there is a single input directory that contains all of the data to be used for the test. And there is only one input repo as well.
 
 set -x
 
@@ -24,20 +28,20 @@ if [ -z "$imageVersion" ] ; then
   exit 1
 fi
 
-# Set the default value
+# Set the default value for imageRepo
 if [ -z "$imageRepo" ] ; then
-  imageRepo="darcstarsolutions"
+  imageRepo="[imageRepo]"
 fi
 
-# Set the default value
+# Set the default value for imageName
 if [ -z "$imageName" ] ; then
-  imageName="test-datum-timeout-behavior"
+  imageName="[imageName]"
 fi
 
-# Crate the image tag
+# Create the image tag
 imageTag="${imageRepo}/${imageName}:${imageVersion}"
 
-# Set the default value
+# Set the default value for inputDir
 if [ -z "$inputDir" ] ; then
   inputDir="./data/test/"
 fi
